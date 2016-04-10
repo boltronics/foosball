@@ -55,4 +55,29 @@ describe Elo::Calculator do
       expect(calculator.g(30, 40)).to eq(2.625)
     end
   end
+
+  describe ".k" do
+    it "is 60 for a Corld Cup match" do
+      expect(calculator.k("world_cup")).to eq(60)
+    end
+
+    it "is 50 for a Continental Championship or Intercontinental Tournaments" do
+      expect(calculator.k("continental_championship")).to eq(50)
+      expect(calculator.k("intercontinental_tournament")).to eq(50)
+    end
+
+    it "is 40 for World Cup and Continental qualifiers and major tournaments" do
+      expect(calculator.k("world_cup_qualifier")).to eq(40)
+      expect(calculator.k("continental_qualifier")).to eq(40)
+      expect(calculator.k("major_tournament")).to eq(40)
+    end
+
+    it "is 30 for any other tournament" do
+      expect(calculator.k("other_tournament")).to eq(30)
+    end
+
+    it "is 20 for a friendly" do
+      expect(calculator.k("friendly")).to eq(20)
+    end
+  end
 end

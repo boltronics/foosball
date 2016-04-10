@@ -46,6 +46,21 @@ module Elo
         diff *= -1 if diff < 0
         diff
       end
+
+      def k match_type
+        case match_type
+        when "world_cup"
+          60
+        when "continental_championship", "intercontinental_tournament"
+          50
+        when "world_cup_qualifier", "continental_qualifier", "major_tournament"
+          40
+        when "other_tournament"
+          30
+        else
+          20
+        end
+      end
     end
   end
 end
